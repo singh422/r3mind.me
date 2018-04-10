@@ -1,0 +1,17 @@
+Dhriti Chawla (chawla5@purdue.edu)
+Stefany Go (gunawang@purdue.edu)
+Avinash Singh (singh422@purdue.edu)
+
+---------------
+|  r3mind.me  | 
+---------------
+
+A web application which lets users set a reminder for various events. 
+The users get a text/call(based on their preference) before their events. 
+The users also have a dock to see all their upcoming tasks with a live countdown to motivate 
+them to finish their task.
+
+~Backend: A node.js/Python server 
+~Database: Firebase to store user information
+~Frontend: HTML/CSS or Bootstrap along with a framework (AngularJS, VUE.js) to make it interactive
+~API: Twilio API to send automated texts and calls to users at the specified time
