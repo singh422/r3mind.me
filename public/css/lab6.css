@@ -174,3 +174,6 @@ input:focus{
   text-align: right;
   margin-bottom:10px;
 }
+#reminderPage {
+  display: none;
+}
