@@ -19,7 +19,8 @@ function body_on_load(){
     // User is signed in.
     loginForm.style.display = "none";
     reminderPage.style.display = "block";
-    console.log("comes here and is successful")
+    //console.log("comes here and is successful")
+
   } else {
     // No user is signed in.
     loginForm.style.display = "block";
@@ -38,6 +39,7 @@ function body_on_load(){
      loginForm.style.display = "none";
      reminderPage.style.display = "block";
      console.log("comes here and is successful")
+     getEventsData();
    } else {
      // No user is signed in.
 
@@ -54,34 +56,91 @@ function body_on_load(){
    phoneNumber = phoneNumberInputField.value;
    emailAddress = emailInputField.value;
    password = passwordInputField.value;
+   if (checkValidSignupInput(firstName,lastName,phoneNumber,emailAddress,password)){
+     //alert("Name = " + firstName + lastName +emailAddress);
+     firebase.auth().createUserWithEmailAndPassword(emailAddress, password).then(function(response) {
+        console.log(response.uid);
+        writeUserDataToDatabase(firstName,lastName,emailAddress,phoneNumber,response.uid);
 
-   //alert("Name = " + firstName + lastName +emailAddress);
-   firebase.auth().createUserWithEmailAndPassword(emailAddress, password).then(function(response) {
-      console.log(response.uid);
-      writeUserDataToDatabase(firstName,lastName,emailAddress,phoneNumber,response.uid);
+        }).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    alert(errorMessage);
+    // ...
+    });
+  }else {
+    console.log("comes here");
+  }
 
-      }).catch(function(error) {
-  // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  // ...
-  });
+ }
+
+
+ function checkValidSignupInput(firstName,lastName,phoneNumber,emailAddress,password) {
+
+   if(firstName.trim()===""){
+     alert("Please enter valid First Name");
+     firstNameInputField.focus();
+     return false;
+   } else if(lastName.trim()===""){
+     alert("Please enter valid Last Name");
+     lastNameInputField.focus();
+     return false;
+   } else if(phoneNumber.trim()===""){
+     alert("Please enter valid Phone Number");
+     phoneNumberInputField.focus();
+     return false;
+   } else if(emailAddress.trim()===""){
+     alert("Please enter valid Email Address");
+     emailInputField.focus();
+     return false;
+   } else if (password.trim()===""){
+     alert("Please enter valid Password");
+     passwordInputField.focus();
+     return false;
+   }
+   if (checkValidPhoneNumber(phoneNumber)){
+     return true;
+   }
+   alert("Please enter valid Phone Number");
+   phoneNumberInputField.focus();
+   return false;
+ }
+
+ function checkValidPhoneNumber(phoneNumber) {
+   return phoneNumber.match(/\d/g).length===10;
  }
 
  function onClickLoginButton() {
    emailAddress = emailSignInInputField.value;
    password = passwordSignInInputField.value;
-  // alert("comes  here " + emailAddress);
 
-   firebase.auth().signInWithEmailAndPassword(emailAddress, password).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    console.log("sad coz it comes here");
-    console.log(errorMessage);
-  // ...
-  });
+   if (checkValidLoginInput(emailAddress,password)){
+     firebase.auth().signInWithEmailAndPassword(emailAddress, password).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log("sad coz it comes here");
+      console.log(errorMessage);
+      alert(errorMessage);
+    // ...
+    });
 
+   }
+ }
+
+ function checkValidLoginInput(emailAddress,password){
+
+   if(emailAddress.trim()===""){
+     alert("Please enter valid Email Address");
+     emailSignInInputField.focus();
+     return false;
+   } else if (password.trim()===""){
+     alert("Please enter valid Password");
+     passwordSignInInputField.focus();
+     return false;
+   }
+   return true;
  }
 
  function onClicklogoutButton (){
@@ -108,6 +167,34 @@ function body_on_load(){
     console.log(firebase.auth().currentUser.uid);
     //check for validation functions
     writeEventDetailsToDatabase(message,date,time,callFeature,messageFeature);
+
+  }
+
+  function getEventsData() {
+    console.log("comes here 1");
+    var userID = firebase.auth().currentUser.uid;
+    var query = firebase.database().ref("events/"+userID);
+        query.once("value")
+          .then(function(snapshot) {
+            console.log(snapshot.val());
+            snapshot.forEach(function(childSnapshot) {
+              var task = childSnapshot.val().Message;
+              var date = childSnapshot.val().Date;
+              var time = childSnapshot.val().Time;
+              var messageFeature = childSnapshot.val().MessageFeature;
+              var callFeature = childSnapshot.val().CallFeature;
+
+              console.log(task);
+              console.log(date);
+              console.log(messageFeature);
+              console.log(time);
+          });
+        }).catch(function(error) {
+         console.log('reading failed');
+         console.lof(error);
+        });
+
+
 
   }
 
