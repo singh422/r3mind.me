@@ -10,7 +10,7 @@
 
 <body onload="body_on_load()">
 
-  <div id="loginForm" class="form">
+  <div id="loginForm" class="form form1">
 
       <img src = "remindmeee.png" alt = "LOGO" align="middle">
       <ul class="tab-group">
@@ -103,17 +103,118 @@
 <!-- reminder page -->
 
 <div id = "reminderPage">
-      <h1> home page </h1>
-      <div>
-      <input type="text" placeholder="message" id="messageInput"><br>
-      <input type="date" placeholder="date" id="dateInput"><br>
-      <input type="time" placeholder="time" id="timeInput"><br>
-      <input type="number" id="callCheckboxInput"><br>Call<br>
-      <input type="number" id="messageCheckboxInput"><br>Message<br>
+  <div class="nav">
 
-      <button class="button button-block" id="submitNewEventButtonInput"/>make event</button>
-      </div>
-      <button class="button button-block" id="logoutButtonInput"/>Log Out</button>
+    <ul class="pull-left">
+    <li ><img id = "th-img" src= "remindmeee.png"></li>
+    </ul>
+
+
+
+
+        <ul class="pull-right">
+          <li class = "divider"></li>
+          <li style="float:right"><a href="#">Incomplete Tasks</a></li>
+          <li style="float:right"><a href="#">Completed Tasks</a></li>
+          <li style="float:right" id="myBtn"><a href="#">[ + ]</a></li>
+          <ul class="pull-left" id="logoutButtonInput">
+            <li class = "divider"></li>
+          <li ><a href="#">LogOut</a></li>
+          </ul>
+
+        </ul>
+
+    </div>
+
+  <div class="form form2">
+
+  <!--MOOOOOODAL -->
+    <!-- Trigger/Open The Modal -->
+
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class = "mod">
+    <span class="close">&times;</span>
+
+    <p>Enter your task</p>
+    <input type="text" name="task" placeholder="Need to do laundry" id="messageInput"><br>
+
+    <p>Due date</p>
+    <input type="date" name = "due" id="dateInput"><br>
+
+    <p>Time it's due</p>
+    <input type="time" name = "due" id="timeInput"><br>
+
+    <p>Do you want a call as a reminder?</p>
+    <input type="radio" name="call" value="Yes" checked id="callCheckboxInput"> <p>Yes</p>
+    <input type="radio" name="call" value="No" id="callCheckboxInput"> <p>No</p> <br>
+
+    <p>Do you want a message as a reminder?</p>
+    <input type="radio" name="message" value="Yes" checked id="messageCheckboxInput">  <p>Yes</p>
+    <input type="radio" name="message" value="No" id="messageCheckboxInput"> <p>No</p> <br>
+
+
+    <button class="button button-block" id="submitNewEventButtonInput">Done</button>
+  </div>
+  </div>
+
+  </div>
+
+  <script>
+  // Get the modal
+  var modal = document.getElementById('myModal');
+
+  // Get the button that opens the modal
+  var btn = document.getElementById("myBtn");
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks the button, open the modal
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+  }
+  </script>
+  <!--MOOOOOODAL -->
+
+  <table>
+  <tr>
+    <td>something here?</td>
+  </tr>
+  <tr>
+    <td>something here?</td>
+  </tr>
+  <tr>
+    <td>something here?</td>
+  </tr>
+  <tr>
+    <td>something here?</td>
+  </tr>
+  <tr>
+    <td>something here?</td>
+  </tr>
+  <tr>
+    <td>something here?</td>
+  </tr>
+  </table>
+
+
+  </div> <!-- /form -->
 </div>
 
 <!-- reminder page -->
