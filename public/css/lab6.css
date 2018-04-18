@@ -241,6 +241,8 @@ ul {
     /* border: 1px solid white; */
 }
 
+
+
 pull-left {
   text-align: left;
   margin-left: 40px;
@@ -290,6 +292,10 @@ text-align: right;
 li a:hover:not(.active) {
     background-color: #ffffff;
     color: #ab82d2;
+}
+
+.tabBarButtonItems {
+  height: 70px;
 }
 
 

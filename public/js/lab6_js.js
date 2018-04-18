@@ -28,6 +28,7 @@ function body_on_load(){
 
   }
 
+  setMinDate();
 
  }
 
@@ -156,18 +157,79 @@ function body_on_load(){
  }
 
   function onClickSubmitEventButton() {
+
     var message = messageInput.value;
     var date = dateInput.value;
     var time = timeInput.value;
-    var callFeature = callCheckboxInput.value;
-    var messageFeature = messageCheckboxInput.value;
-
+    var callFeature;
+    var messageFeature;
+    if(callCheckboxInput1.checked){
+      callFeature = callCheckboxInput1.value;
+    }else {
+      callFeature = callCheckboxInput2.value;
+    }
+    if ( messageCheckboxInput1.checked){
+      messageFeature = messageCheckboxInput1.value;
+    } else {
+      messageFeature = messageCheckboxInput2.value;
+    }
+    if (validateEventInputButton(message,date,time)) {
+        writeEventDetailsToDatabase(message,date,time,callFeature,messageFeature);
+        modal.style.display = "none";
+    }
     console.log(date);
     console.log(time);
     console.log(firebase.auth().currentUser.uid);
     //check for validation functions
-    writeEventDetailsToDatabase(message,date,time,callFeature,messageFeature);
 
+  }
+
+  function validateEventInputButton(message,date,time) {
+
+    if(message.trim()===""){
+      alert("Please enter valid task message");
+      messageInput.focus();
+      return false;
+    } else if(date.trim()==="") {
+      alert("Please enter a valid date");
+      dateInput.focus();
+      return false;
+    } else if(time.trim()==="") {
+      alert("Please enter a valid time");
+      timeInput.focus();
+      return false;
+    }
+
+    var dtToday = new Date();
+
+     var month = dtToday.getMonth() + 1;
+     var day = dtToday.getDate();
+     var year = dtToday.getFullYear();
+
+     if(month < 10)
+         month = '0' + month.toString();
+     if(day < 10)
+         day = '0' + day.toString();
+
+     var currentDate = year + '-' + month + '-' + day;
+
+     if(date < currentDate){
+       alert("Please enter a valid date which is in the future.");
+       dateInput.focus();
+       return false;
+     } else if ( date === currentDate) {
+       var d = new Date();
+       var h = (d.getHours()<10?'0':'') + d.getHours();
+       var m = (d.getMinutes()<10?'0':'') + d.getMinutes();
+       var currTime = h + ":" +m;
+       if(time < currTime ) {
+         alert("Please enter a valid time which is in the future");
+         timeInput.focus();
+         return false;
+       }
+     }
+
+    return true;
   }
 
   function getEventsData() {
@@ -237,4 +299,21 @@ function body_on_load(){
       console.lof(error);
     });
     console.log("successful write");
+ }
+
+ function setMinDate() {
+   var dtToday = new Date();
+
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+
+    var minDate = year + '-' + month + '-' + day;
+
+    dateInput.setAttribute("min",minDate);
  }
