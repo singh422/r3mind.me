@@ -115,10 +115,29 @@ function body_on_load(){
 
   function writeEventDetailsToDatabase(message,date,time,callFeature,messageFeature) {
 
-      var myRef = firebase.database().ref().push();
-      var key = myRef.key();
+     var userID = firebase.auth().currentUser.uid;
+     var messageListRef = firebase.database().ref('events/'+userID);
+     var newMessageRef = messageListRef.push();
+     newMessageRef.set({
+     'Event': message,
+     'Date': date,
+     'Time': time,
+     'CallFeature': callFeature,
+     'MessageFeature': messageFeature
+    }).then(function() {
+     console.log('Synchronization succeeded');
+    })
+    .catch(function(error) {
+     console.log('Synchronization failed');
+     console.lof(error);
+    });
+    console.log("successful write");
+ 
 
-    console.log(key);
+     // var myRef = firebase.database().ref().push();
+     // var key = myRef.key();
+
+    //console.log(key);
     // var userID = firebase.auth().currentUser.uid;
     // firebase.database().ref('events/'+userID ).set({
     //  message: message,
@@ -134,8 +153,6 @@ function body_on_load(){
     //    console.lof(error);
     //  });
     //  console.log("successful write");
-
-
 
 
 
