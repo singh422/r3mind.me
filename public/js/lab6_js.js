@@ -119,7 +119,7 @@ function body_on_load(){
      var messageListRef = firebase.database().ref('events/'+userID);
      var newMessageRef = messageListRef.push();
      newMessageRef.set({
-     'Event': message,
+     'Message': message,
      'Date': date,
      'Time': time,
      'CallFeature': callFeature,
@@ -132,29 +132,6 @@ function body_on_load(){
      console.lof(error);
     });
     console.log("successful write");
- 
-
-     // var myRef = firebase.database().ref().push();
-     // var key = myRef.key();
-
-    //console.log(key);
-    // var userID = firebase.auth().currentUser.uid;
-    // firebase.database().ref('events/'+userID ).set({
-    //  message: message,
-    //  date: date,
-    //  time: time,
-    //  callFeature: callFeature,
-    //  messageFeature: messageFeature
-    //  }).then(function() {
-    //    console.log('Synchronization succeeded');
-    //  })
-    //  .catch(function(error) {
-    //    console.log('Synchronization failed');
-    //    console.lof(error);
-    //  });
-    //  console.log("successful write");
-
-
 
   }
 
