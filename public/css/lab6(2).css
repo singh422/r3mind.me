@@ -39,7 +39,7 @@ a {
   transition: .5s ease;
 }
 a:hover {
-  color: #f0b648;
+  color: #9E74C7;
 }
 
 .form {
@@ -79,7 +79,7 @@ text-align: right;
 
 
 li a:hover {
-  color: #f0b648;
+  color: #9E74C7;
   text-decoration: none;
 
 }
@@ -263,7 +263,7 @@ input:focus{
   transition: all 0.5s ease;
 }
 .button:hover, .button:focus {
-  background: #f0b648;
+  background: #9E74C7;
 }
 
 .button-block {
@@ -309,7 +309,7 @@ input:focus{
 /* Modal Content */
 .modal-content {
   width: 70%;
-  max-height: 90%;
+  max-height: 95%;
     background-color: #fceaea;
     margin: auto;
     padding: 40px;
