@@ -22,7 +22,7 @@ a {
   transition: .5s ease;
 }
 a:hover {
-  color: #ffffff;
+  color: #ab82d2;
 }
 
 .form  {
@@ -39,7 +39,7 @@ a:hover {
 
 .form2 {
 background:rgba(150,150,150,0.6);
-margin-top: 180px;
+margin-top: 150px;
   max-width: 1000px;
 }
 
@@ -76,7 +76,7 @@ margin-top: 180px;
   color: #6B95EF;
 }
 .tab-group .active a {
-  background: #6B95EF;
+  background: #ae8ece;
   color: #ffffff;
 }
 
@@ -165,12 +165,12 @@ input:focus{
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .1em;
-  background: #110C03;
+  background: #000;
   color: #ffffff;
   transition: all 0.5s ease;
 }
 .button:hover, .button:focus {
-  background: #6B95EF;
+  background: #6a359f;
 }
 
 .button-block {
@@ -224,7 +224,7 @@ th, td {
 
 
 li a:hover {
-  color: #9E74C7;
+  color: #855dab;
   text-decoration: none;
 
 }
@@ -235,8 +235,8 @@ ul {
     padding: 0;
     overflow: hidden;
     background-color: #000;
-    height: 70px;
-    /* display: inline-block; */
+    height: 60px;
+    /* display: inline; */
 
     /* border: 1px solid white; */
 }
@@ -248,7 +248,8 @@ pull-left {
 
 pull-right{
 text-align: right;
-  /* margin-right: 40px; */
+  margin-right: 40px;
+  margin-left: 40px;
   align-items: right;
 }
 
@@ -257,7 +258,7 @@ text-align: right;
 .sticky {
   position: fixed;
   top: 0;
-  width: 100%
+  width: 100%;
 }
 
 /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
@@ -278,22 +279,24 @@ text-align: right;
 .divider ~ li a {
     display: inline-block;
     color: white;
-    /* text-align: center; */
+    text-align: center;
     padding: 25px 30px;
     text-decoration: none;
     text-transform: uppercase;
     font-weight: 600;
+
 }
 
 li a:hover:not(.active) {
     background-color: #ffffff;
+    color: #ab82d2;
 }
 
 
 
 #sm{
   z-index: 3;
-  display: in
+  /* display: in */
 }
 
 #logoutButtonMainPage{
