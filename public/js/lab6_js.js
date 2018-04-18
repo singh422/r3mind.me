@@ -13,6 +13,7 @@ function body_on_load(){
   loginButtonInput.onclick = onClickLoginButton;
   signupButtonInput.onclick = onClickSignupButton;
   logoutButtonInput.onclick = onClicklogoutButton;
+  submitNewEventButtonInput.onclick = onClickSubmitEventButton;
 
   if (user) {
     // User is signed in.
@@ -94,6 +95,52 @@ function body_on_load(){
     // An error happened.
     });
  }
+
+  function onClickSubmitEventButton() {
+    var message = messageInput.value;
+    var date = dateInput.value;
+    var time = timeInput.value;
+    var callFeature = callCheckboxInput.value;
+    var messageFeature = messageCheckboxInput.value;
+
+    console.log(date);
+    console.log(time);
+    console.log(firebase.auth().currentUser.uid);
+    //check for validation functions
+    writeEventDetailsToDatabase(message,date,time,callFeature,messageFeature);
+
+  }
+
+
+
+  function writeEventDetailsToDatabase(message,date,time,callFeature,messageFeature) {
+
+      var myRef = firebase.database().ref().push();
+      var key = myRef.key();
+
+    console.log(key);
+    // var userID = firebase.auth().currentUser.uid;
+    // firebase.database().ref('events/'+userID ).set({
+    //  message: message,
+    //  date: date,
+    //  time: time,
+    //  callFeature: callFeature,
+    //  messageFeature: messageFeature
+    //  }).then(function() {
+    //    console.log('Synchronization succeeded');
+    //  })
+    //  .catch(function(error) {
+    //    console.log('Synchronization failed');
+    //    console.lof(error);
+    //  });
+    //  console.log("successful write");
+
+
+
+
+
+  }
+
 
  function writeUserDataToDatabase(firstName,lastName,emailAddress,phoneNumber,userID) {
    firebase.database().ref('users/'+userID).set({
