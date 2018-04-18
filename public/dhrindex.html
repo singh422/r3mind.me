@@ -16,21 +16,90 @@
 <body onload="body_on_load()">
   <div class="nav">
 
-        <ul class="pull-left">
-        <li><a href="#">Incomplete tasks</a></li>
-        <li><a href="#">Completed tasks</a></li>
+    <ul class="pull-left">
+    <li ><img id = "th-img" src= "remindme.png"></li>
+    </ul>
+
+        <ul class="pull-right" id="logoutButtonMainPage">
+        <li ><a href="#">LogOut</a></li>
+        <!-- <li><a href="#">Completed tasks</a></li> -->
         </ul>
 
 
         <ul class="pull-right">
-          <li style="float:right"><a href="#">Help</a></li>
-          <li style="float:right"><a href="#">Logout</a></li>
-          <li style="float:right"><a href="#">[ + ]</a></li>
+          <li style="float:right"><a href="#">Incomplete Tasks</a></li>
+          <li style="float:right"><a href="#">Completed Tasks</a></li>
+          <li style="float:right" id="myBtn"><a href="#">[ + ]</a></li>
         </ul>
 
     </div>
 
   <div class="form">
+
+<!--MOOOOOODAL -->
+    <!-- Trigger/Open The Modal -->
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class = "mod">
+    <span class="close">&times;</span>
+    <p>Enter your task</p>
+    <input type="text" name="firstname"><br>
+    <p>Due date</p>
+
+    <input type="date" name = "due"><br>
+
+    <p>Time it's due</p>
+
+    <input type="time" name = "due"><br>
+    <p>Do you want a call as a reminder?</p>
+    <input type="radio" name="call" value="Yes" checked>
+    <p>Yes</p>
+    <input type="radio" name="call" value="No"> <p>No</p> <br>
+
+    <p>Do you want a message as a reminder?</p>
+    <input type="radio" name="message" value="Yes" checked>  <p>Yes</p>
+    <input type="radio" name="message" value="No"> <p>No</p> <br>
+
+
+    <button class="Button">Done</button>
+  </div>
+</div>
+
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+<!--MOOOOOODAL -->
+
 <table>
   <tr>
     <td>something here?</td>
@@ -55,7 +124,7 @@
 
 </div> <!-- /form -->
 <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> -->
-<script  src="js/lab6.js"></script>
+<!-- <script  src="js/lab6.js"></script> -->
 <script language="javascript" type="text/javascript" src="js/lab6_js.js"></script>
 
 </body>
