@@ -6,6 +6,8 @@
 
 body {
   background:url(../6.jpg);
+
+  /* font-family: "Courier New", Courier, monospace; */
   font-family: 'Titillium Web', sans-serif;
   background-size:cover;
 }
@@ -39,7 +41,8 @@ a:hover {
 
 .form2 {
 background:rgba(150,150,150,0.6);
-margin-top: 150px;
+margin-top: 100px;
+margin-bottom: 100px;
   max-width: 1000px;
 }
 
@@ -48,6 +51,8 @@ margin-top: 150px;
 	}
 
 .tab-group {
+  /* font-family: 'Satisfy', cursive; */
+  font-size: 40px;``
   list-style: none;
   padding: 0;
   margin: 0 0 40px 0;
@@ -90,6 +95,7 @@ h1 {
   font-weight: 300;
   margin: 0 0 40px;
 }
+
 
 label {
   position: absolute;
@@ -194,7 +200,7 @@ table, th, td {
 }
 
 tr:nth-child(even) {background-color: #d6d1d1;}
-tr:nth-child(odd) {background-color: #f0e6e6;}
+tr:nth-child(odd) {background-color: #f1f1f1;}
 
 table {
   width: 100%;
@@ -205,19 +211,68 @@ th, td {
     text-align: left;
 }
 
-.nav {
-  background:rgba(0,0,0,1);
-  padding: 0px;
-  max-height: 80px;
+/* ...... */
+
+.header {
+  background-color: #f1f1f1;
+  margin-top: 0px;
+  /* height: 700px; */
+  text-align: center;
+  /* height: 1000px; */
 
 }
 
+#top,#bottom{
+    /* height: 1000px; */
+    /* width: 300px;
+    background: green; */
+}
+
+#middle{
+
+    width: 300px;
+    /* background: pink; */
+
+}
+
+#nav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+#nav a {
+  float: right;
+  display: inline-block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 16px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+#nav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+#nav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.content {
+  padding: 16px;
+}
+
+/* ....... */
+
 #th-img {
-   margin-left: 30px;
+   /* margin-left: 30px; */
     border-radius: 4px;  /* Rounded border */
     padding: 5px; /* Some padding */
-    width: 150px; /* Set a small width */
+    width: 30px; /* Set a small width */
     background: none;
+    align-self: center;
 }
 
 
@@ -258,8 +313,8 @@ text-align: right;
 
 /* The sticky class is added to the navbar with JS when it reaches its scroll position */
 .sticky {
-  position: fixed;
-  top: 0;
+  position: sticky;
+  top: 0px;
   width: 100%;
 }
 
@@ -272,7 +327,7 @@ text-align: right;
   display: inline;
   color: #000;
   float: left;
-  height: 70px;
+  height: 80px;
   align-items: center;
 }
 
@@ -284,8 +339,10 @@ text-align: right;
     text-align: center;
     padding: 25px 30px;
     text-decoration: none;
-    text-transform: uppercase;
-    font-weight: 600;
+    font-size: 20px;
+    /* font-family: 'Satisfy', cursive; */
+    /* text-transform: uppercase; */
+    font-weight: 200;
 
 }
 
@@ -326,7 +383,7 @@ li a:hover:not(.active) {
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(226,217,217); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-box-shadow: 0px 0px 40px 16px rgba(18,18,18,1.00);
+
 
 }
 
@@ -344,15 +401,38 @@ box-shadow: 0px 0px 40px 16px rgba(18,18,18,1.00);
     margin: auto;
     padding: 40px;
     border: 1px solid #888;
+    border-radius: 12px;
+    box-shadow: 0px 0px 40px 16px rgba(18,18,18,1.00);
+    font-family: 'Satisfy', cursive;
+    font-size: 20px;
+    -webkit-animation-name: animatetop;
+ -webkit-animation-duration: 0.4s;
+ animation-name: animatetop;
+ animation-duration: 0.4s
 
+
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
 }
 
 /* The Close Button */
 .close {
-    color: #aaaaaa;
+     color: #aaaaaa;
     float: right;
-    font-size: 28px;
+    font-size: 30px;
     font-weight: bold;
+
+    font-family: 'Titillium Web', sans-serif;
+
 }
 
 .close:hover,
@@ -360,4 +440,67 @@ box-shadow: 0px 0px 40px 16px rgba(18,18,18,1.00);
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+
+/* The container */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: white;
+    /* box-shadow:grey; */
+}
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #000;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
 }

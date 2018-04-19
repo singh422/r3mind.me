@@ -2,7 +2,8 @@
 <html>
 <head>
   <title>r3mind.me</title>
-  <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
+  <!-- <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel="stylesheet" href="css/lab6.css">
 
@@ -21,7 +22,7 @@
       <div class="tab-content">
         <div id="signup">
 
-   <h1>Sign Up for Free</h1>
+   <h1 style="font-family: 'Satisfy', cursive">Sign Up for Free</h1>
           <div >
 
           <div class="top-row">
@@ -69,7 +70,7 @@
 
         <div id="login">
 
-	<h1>Welcome Back!</h1>
+	<h1 style="font-family: 'Satisfy', cursive">Welcome Back!</h1>
 
           <div>
 
@@ -103,11 +104,22 @@
 <!-- reminder page -->
 
 <div id = "reminderPage">
-  <div class="nav">
 
-    <ul id= ""class="pull-left">
+  <!-- <div class="header"> -->
+    <!-- <h2>Welcome :)</h2> -->
+    <!-- <p>Scroll down to see the sticky effect.</p> -->
+    <!-- <h1> Welcome to</h1> -->
+    <!-- <img src= "remindmeee.png"> -->
+    <!-- <h1>You have enough to remember, we got this one. </h1> -->
+    <!-- <p style="font-family: 'Satisfy', cursive; font-size:20px; text-align: center"> Add Tasks |   Set Reminders   |   Get Notified | Check Progess</p> -->
+  <!-- </div> -->
+
+
+  <div id="nav">
+
+    <!-- <ul id= ""class="pull-left">
     <li ><img id = "th-img" src= "remindmeee.png"></li>
-    </ul>
+    </ul> -->
 
 
         <ul class="pull-right">
@@ -116,6 +128,7 @@
           <li style="float:right"><a href="#">Completed Tasks</a></li>
           <li style="float:right" id="myBtn"><a href="#">[ + ]</a></li>
           <ul class="pull-left" id="logoutButtonInput">
+            <!-- <img style="width: 150px;" src = "remindmeee.png"> -->
             <li class = "divider"></li>
           <li ><a href="#">LogOut</a></li>
           </ul>
@@ -124,7 +137,31 @@
 
     </div>
 
+
+    <div class="header">
+      <!-- <h2>Welcome :)</h2> -->
+      <!-- <p>Scroll down to see the sticky effect.</p> -->
+      <!-- <h1> Welcome to</h1> -->
+      <br><br><br><br><br><br><br><br>
+      <img src= "remindmeee.png">
+      <h1 style="font-family: 'Satisfy', cursive; text-align: center; font-size:40px">You have enough to remember, we got this one. </h1>
+      <p style: "font-size:20px; text-align: center"> Add Tasks |   Set Reminders   |   Get Notified | Check Progess</p>
+
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+      <!-- <a href="#top">Top</a> -->
+      <a href="#middle"><img id= "th-img" src= "btn.png"></a>
+
+      <div id="top"><a href="top"></a></div>
+      <div id="middle"><a href="middle"></a> </div>
+
+
+    </div>
+
+
   <div class="form form2">
+
+
+    <!-- <div id="top"><a href="top">Top</a></div> -->
 
   <!--MOOOOOODAL -->
     <!-- Trigger/Open The Modal -->
@@ -138,7 +175,7 @@
     <span class="close">&times;</span>
 
     <p>Enter your task</p>
-    <input type="text" name="task" placeholder="Need to do laundry" id="messageInput"><br>
+    <input type="text" name="task" id="messageInput"><br>
 
     <p>Due date</p>
     <input type="date" name = "due" id="dateInput"><br>
@@ -147,13 +184,27 @@
     <input type="time" name = "due" id="timeInput"><br>
 
     <p>Do you want a call as a reminder?</p>
-    <input type="radio" name="call" value="Yes" checked id="callCheckboxInput1"> <p>Yes</p>
-    <input type="radio" name="call" value="No" id="callCheckboxInput2"> <p>No</p> <br>
+    <label class="container">Yes
+      <input type="radio" checked="checked" name="call" value="Yes" id="callCheckboxInput1">
+      <span class="checkmark"></span>
+    </label>
+    <label class="container">No
+      <input type="radio" name="call" value="No" id="callCheckboxInput2">
+      <span class="checkmark"></span>
+    </label>
 
     <p>Do you want a message as a reminder?</p>
-    <input type="radio" name="message" value="Yes" checked id="messageCheckboxInput1">  <p>Yes</p>
-    <input type="radio" name="message" value="No" id="messageCheckboxInput2"> <p>No</p> <br>
 
+    <label class="container">Yes
+      <input type="radio" checked="checked" name="message" value="Yes" id="messageCheckboxInput1">
+      <span class="checkmark"></span>
+    </label>
+    <label class="container">No
+      <input type="radio" name="message" value="No" id="messageCheckboxInput2">
+      <span class="checkmark"></span>
+    </label>
+    <br>
+    <br>
 
     <button class="button button-block" id="submitNewEventButtonInput">Done</button>
   </div>
@@ -199,6 +250,21 @@
 
   </div> <!-- /form -->
 </div>
+
+<script>
+window.onscroll = function() {myFunction()};
+
+var navbar = document.getElementById("nav");
+var sticky = navbar.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+</script>
 
 <!-- reminder page -->
 
