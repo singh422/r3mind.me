@@ -7,6 +7,7 @@ var emailAddress;
 var password;
 var user = firebase.auth().currentUser;
 var database = firebase.database();
+var events = [];
 
 function body_on_load(){
 
@@ -238,7 +239,7 @@ function body_on_load(){
     var query = firebase.database().ref("events/"+userID);
         query.once("value")
           .then(function(snapshot) {
-            console.log(snapshot.val());
+            //console.log(snapshot.val());
             snapshot.forEach(function(childSnapshot) {
               var task = childSnapshot.val().Message;
               var date = childSnapshot.val().Date;
@@ -246,18 +247,70 @@ function body_on_load(){
               var messageFeature = childSnapshot.val().MessageFeature;
               var callFeature = childSnapshot.val().CallFeature;
 
-              console.log(task);
-              console.log(date);
-              console.log(messageFeature);
-              console.log(time);
+              var event  = {
+                task: task,
+                date: date,
+                time: time,
+                messageFeature: messageFeature,
+                callFeature: callFeature,
+                //id: childSnapshot.key
+              };
+
+              events.push(event);
           });
+
+          console.log(events.length);
+          loadEventsTable();
         }).catch(function(error) {
          console.log('reading failed');
-         console.lof(error);
+         console.log(error);
         });
 
 
 
+
+
+  }
+
+  function loadEventsTable() {
+    var count = 0;
+    console.log("load");
+    console.log(events);
+    console.log(events.length);
+    while (count < events.length) {
+
+      console.log("loading...");
+      var eventObj = events[count];
+      var row = eventsTable.insertRow();
+      var rowDiv = document.createElement("div");
+      var taskDiv =  document.createElement("div");
+      var dateDiv =  document.createElement("div");
+      var timeDiv =  document.createElement("div");
+      var callFeature = document.createElement("div");
+      var messageFeature = document.createElement("div");
+
+      taskDiv.innerHTML = eventObj.task;
+      dateDiv.innerHTML = eventObj.date;
+      timeDiv.innerHTML = eventObj.time;
+      callFeature.innerHTML = eventObj.callFeature;
+      messageFeature.innerHTML = eventObj.messageFeature;
+
+      rowDiv.appendChild(taskDiv);
+      rowDiv.appendChild(dateDiv);
+      rowDiv.appendChild(timeDiv);
+      rowDiv.appendChild(callFeature);
+      rowDiv.appendChild(messageFeature);
+      rowDiv.setAttribute("id",eventObj.id);
+      rowDiv.setAttribute("onClick","editEvent(this.id)");
+      row.appendChild(rowDiv);
+
+      eventsTable.insertRow(row);
+      count++;
+    }
+  }
+
+  function editEvent (id) {
+    console.log("edit clicked");
   }
 
 
