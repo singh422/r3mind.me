@@ -273,6 +273,7 @@ function body_on_load(){
   }
 
   function loadEventsTable() {
+
     var count = 0;
     console.log("load");
     console.log(events);
@@ -288,6 +289,13 @@ function body_on_load(){
       var timeDiv =  document.createElement("div");
       var callFeature = document.createElement("div");
       var messageFeature = document.createElement("div");
+
+      taskDiv.setAttribute("id","tableTaskDiv");
+      dateDiv.setAttribute("id","tableDateDiv");
+      timeDiv.setAttribute("id","tableTimeDiv");
+      callFeatureDiv.setAttribute("id","tableCallDiv");
+      messageFeature.setAttribute("id","tableMessageDiv");
+
 
       taskDiv.innerHTML = eventObj.task;
       dateDiv.innerHTML = eventObj.date;
