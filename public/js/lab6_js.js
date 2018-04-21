@@ -283,27 +283,37 @@ function body_on_load(){
       console.log("loading...");
       var eventObj = events[count];
       var row = eventsTable.insertRow();
+
+      var cell1 = row.insertCell(0);
+      // var cell2 = row.insertCell(1);
+
+
+
+      //////
       var rowDiv = document.createElement("div");
-      var taskDiv =  document.createElement("div");
+      // var taskDiv =  document.createElement("div");
       var dateDiv =  document.createElement("div");
       var timeDiv =  document.createElement("div");
       var callFeature = document.createElement("div");
       var messageFeature = document.createElement("div");
 
-      taskDiv.setAttribute("id","tableTaskDiv");
+      cell1.setAttribute("id","tableTaskDiv");
+      // taskDiv.setAttribute("id","tableTaskDiv");
       dateDiv.setAttribute("id","tableDateDiv");
       timeDiv.setAttribute("id","tableTimeDiv");
       callFeature.setAttribute("id","tableCallDiv");
       messageFeature.setAttribute("id","tableMessageDiv");
 
 
-      taskDiv.innerHTML = eventObj.task;
+      cell1.innerHTML = eventObj.task;
+
+      // taskDiv.innerHTML = eventObj.task;
       dateDiv.innerHTML = eventObj.date;
       timeDiv.innerHTML = eventObj.time;
       callFeature.innerHTML = eventObj.callFeature;
       messageFeature.innerHTML = eventObj.messageFeature;
 
-      rowDiv.appendChild(taskDiv);
+      // rowDiv.appendChild(taskDiv);
       rowDiv.appendChild(dateDiv);
       rowDiv.appendChild(timeDiv);
       rowDiv.appendChild(callFeature);
