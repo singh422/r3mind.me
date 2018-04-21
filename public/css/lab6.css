@@ -504,3 +504,45 @@ li a:hover:not(.active) {
   border-radius: 50%;
   background: white;
 }
+
+
+ #tableTaskDiv {
+   margin-top: 20px;
+  text-align: left;
+  margin-left: 60px;
+  text-transform: capitalize;
+
+  font-weight:bold;
+}
+
+
+#tableDateDiv {
+  /* text-align: right;
+  margin-right: 60px; */
+  text-align: left;
+  margin-left: 240px;
+}
+
+
+#tableTimeDiv {
+/* text-align: right;
+margin-right: 60px; */
+text-align: left;
+margin-left: 380px;
+font-size: 70px;
+}
+
+#tableCallDiv {
+  /* text-align: left;
+  margin-left: 60px; */
+  text-align: left;
+  margin-left: 640px;
+}
+
+#tableMessageDiv {
+  /* text-align: right;
+  margin-right: 60px;*/
+  margin-bottom: 20px;
+  text-align: left;
+  margin-left: 800px;
+}

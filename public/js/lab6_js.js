@@ -293,7 +293,7 @@ function body_on_load(){
       taskDiv.setAttribute("id","tableTaskDiv");
       dateDiv.setAttribute("id","tableDateDiv");
       timeDiv.setAttribute("id","tableTimeDiv");
-      callFeatureDiv.setAttribute("id","tableCallDiv");
+      callFeature.setAttribute("id","tableCallDiv");
       messageFeature.setAttribute("id","tableMessageDiv");
 
 
