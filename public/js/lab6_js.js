@@ -275,14 +275,17 @@ function body_on_load(){
   function loadEventsTable() {
 
     var count = 0;
-    console.log("load");
-    console.log(events);
-    console.log(events.length);
+    // console.log("load");
+    // console.log(events);
+    // console.log(events.length);
     while (count < events.length) {
 
-      console.log("loading...");
+
       var eventObj = events[count];
       var row = eventsTable.insertRow();
+
+
+
 
       var cell1 = row.insertCell(0);
       // var cell2 = row.insertCell(1);
@@ -296,6 +299,8 @@ function body_on_load(){
       var timeDiv =  document.createElement("div");
       var callFeature = document.createElement("div");
       var messageFeature = document.createElement("div");
+      var timerDiv = document.createElement("div");
+      var taskMessageDiv = document.createElement("div");
 
       cell1.setAttribute("id","tableTaskDiv");
       // taskDiv.setAttribute("id","tableTaskDiv");
@@ -303,28 +308,93 @@ function body_on_load(){
       timeDiv.setAttribute("id","tableTimeDiv");
       callFeature.setAttribute("id","tableCallDiv");
       messageFeature.setAttribute("id","tableMessageDiv");
+      taskMessageDiv.setAttribute("id","taskMessageDiv");
+      rowDiv.setAttribute("id", "rowElementDiv");
+      timerDiv.setAttribute("class", "timerDivClass");
+
+      timerDiv.setAttribute("id", "timerDiv"+count);
+
+      createTimer("timerDiv"+count,eventObj.date, eventObj.time);
 
 
-      cell1.innerHTML = eventObj.task;
+
+      //timerDiv.innerHTML = "hey it should be here";
+      //cell1.innerHTML = eventObj.task;
+      cell1.append(timerDiv);
+        //cell1.innerHTML = timerDiv;
 
       // taskDiv.innerHTML = eventObj.task;
+
+
+      taskMessageDiv.innerHTML = eventObj.task;
       dateDiv.innerHTML = eventObj.date;
       timeDiv.innerHTML = eventObj.time;
       callFeature.innerHTML = eventObj.callFeature;
       messageFeature.innerHTML = eventObj.messageFeature;
 
+
       // rowDiv.appendChild(taskDiv);
+      rowDiv.appendChild(taskMessageDiv);
       rowDiv.appendChild(dateDiv);
       rowDiv.appendChild(timeDiv);
       rowDiv.appendChild(callFeature);
       rowDiv.appendChild(messageFeature);
-      rowDiv.setAttribute("id",eventObj.id);
+      
       rowDiv.setAttribute("onClick","editEvent(this.id)");
       row.appendChild(rowDiv);
 
       eventsTable.insertRow(row);
       count++;
     }
+  }
+
+  function createTimer(divElement, dateVal, timeVal) {
+
+
+    //console.log(dateVal);
+    //console.log(timeVal);
+    var dateParts = dateVal.split("-");
+    var year = parseInt(dateParts[0]);
+    var month = parseInt(dateParts[1]);
+    var day = parseInt(dateParts[2]);
+    var timeParts = timeVal.split(":");
+    var hours = parseInt(timeParts[0]);
+    var minutes = parseInt(timeParts[1]);
+
+    var eventDate = new Date(year, month, day, hours, minutes, 0, 0);
+    //console.log(eventDate.getTime());
+
+
+    var x = setInterval(function() {
+
+        // Get todays date and time
+        var now = new Date().getTime();
+        var countDownDate = eventDate.getTime();
+
+        // Find the distance between now an the count down date
+        var distance = countDownDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Display the result in the element with id="demo"
+        document.getElementById(divElement).innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+        // If the count down is finished, write some text
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById(divElement).innerHTML = "Your event has expired";
+        }
+      }, 1000);
+
+
+
+
+
   }
 
   function editEvent (id) {

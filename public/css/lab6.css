@@ -209,7 +209,7 @@ table {
 }
 
 th, td {
-    padding: 90px;
+    padding: 55px;
     text-align: left;
 }
 
@@ -370,6 +370,11 @@ li a:hover:not(.active) {
   font-weight: 600;
 }
 
+/*#descriptionHeader {
+  position: absolute;
+  height: 500px;
+  width: 100%;
+}*/
 
 
 /* The Modal (background) */
@@ -414,6 +419,7 @@ li a:hover:not(.active) {
 
 
 }
+
 
 /* Add Animation */
 @-webkit-keyframes animatetop {
@@ -509,12 +515,30 @@ li a:hover:not(.active) {
 
 
  #tableTaskDiv {
-   margin-top: 20px;
   /* text-align: left;
   margin-left: 60px; */
+  margin-top: 10px;
+    text-align: center
   text-transform: capitalize;
   font-weight:bold;
   font-size: 30px;
+  width: 35%;
+}
+
+#rowElementDiv {
+  background-color: rgb(0, 0, 102, 0.6);
+
+
+}
+
+.timerDivClass {
+  margin-top: 10px;
+ /* text-align: left;
+ margin-left: 60px; */
+
+ text-transform: capitalize;
+ font-weight:bold;
+ font-size: 20px;
 }
 
 
@@ -526,6 +550,14 @@ li a:hover:not(.active) {
   font-size: 30px;
 }
 
+#taskMessageDiv {
+  margin-top: 20px;
+ /* text-align: left;
+ margin-left: 60px; */
+ text-transform: capitalize;
+ font-weight:bold;
+ font-size: 30px;
+}
 
 #tableTimeDiv {
 /* text-align: right;
