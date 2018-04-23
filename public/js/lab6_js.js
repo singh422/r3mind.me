@@ -8,6 +8,8 @@ var password;
 var user = firebase.auth().currentUser;
 var database = firebase.database();
 var events = [];
+var incompleteEvents = [];
+var completeEvents = [];
 var taskShow = 1;
 
 
@@ -206,7 +208,7 @@ function body_on_load(){
       return false;
     }
 
-    var dtToday = new Date();
+     var dtToday = new Date();
 
      var month = dtToday.getMonth() + 1;
      var day = dtToday.getDate();
@@ -266,33 +268,90 @@ function body_on_load(){
           });
 
           console.log(events.length);
+          filterTasks();
           loadEventsTable();
         }).catch(function(error) {
          console.log('reading failed');
          console.log(error);
         });
 
+  }
+
+  function checkDate(eventDate, eventTime){
 
 
+    var dtToday = new Date();
 
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+
+    var currentDate = year + '-' + month + '-' + day;
+
+    if(eventDate < currentDate){
+      return 0;
+
+    } else if ( eventDate === currentDate) {
+      var d = new Date();
+      var h = (d.getHours()<10?'0':'') + d.getHours();
+      var m = (d.getMinutes()<10?'0':'') + d.getMinutes();
+      var currTime = h + ":" +m;
+      if(eventTime < currTime ) {
+        return 0;
+      }
+  }
+  return 1;
+
+}
+
+
+  function filterTasks() {
+    var count = 0;
+    incompleteEvents=[];
+    completeEvents=[];
+    while(count < events.length) {
+      var eventObj = events[count];
+
+      if (checkDate(eventObj.date, eventObj.time) == 1){
+        console.log("incomplete");
+        console.log(eventObj);
+        incompleteEvents.push(eventObj);
+      }else {
+        console.log("complete");
+        console.log(eventObj);
+        completeEvents.push(eventObj);
+      }
+      count++;
+    }
 
   }
 
 
 function  showIncompleteTasks() {
-  console.log("coming to incomplete");
+  //console.log("coming to incomplete");
     completeTaskButtonClicked.style.color = "white";
     incompleteTaskButtonClicked.style.color = "rgba(130,41,219,0.9)";
-    taskShow =1;
+
+    taskShow = 1;
     //load table accordingly
+    filterTasks();
+    loadEventsTable();
+
   }
 
   function showCompleteTasks() {
-    console.log("coming to complete");
+    //console.log("coming to complete");
     completeTaskButtonClicked.style.color = "rgba(130,41,219,0.9)";
     incompleteTaskButtonClicked.style.color = "white";
     taskShow = 0;
     //load table accordingly
+    filterTasks();
+    loadEventsTable();
 
   }
 
@@ -302,16 +361,22 @@ function  showIncompleteTasks() {
     // console.log("load");
     // console.log(events);
     // console.log(events.length);
+    var eventShow  = [];
     eventsTable.innerHTML="";
-    while (count < events.length) {
+
+    if(taskShow === 0) {
+      eventShow = completeEvents;
+    }
+    else {
+      eventShow = incompleteEvents;
+    }
+    console.log(eventShow);
+
+    while (count < eventShow.length) {
 
 
-      var eventObj = events[count];
+      var eventObj = eventShow[count];
       var row = eventsTable.insertRow();
-
-
-
-
       var cell1 = row.insertCell(0);
       // var cell2 = row.insertCell(1);
 
@@ -337,9 +402,9 @@ function  showIncompleteTasks() {
       rowDiv.setAttribute("id", "rowElementDiv");
       timerDiv.setAttribute("class", "timerDivClass");
 
-      timerDiv.setAttribute("id", "timerDiv"+count);
+      timerDiv.setAttribute("id", "timerDiv"+taskShow+"-"+count);
 
-      createTimer("timerDiv"+count,eventObj.date, eventObj.time);
+      createTimer("timerDiv"+taskShow+"-"+count,eventObj.date, eventObj.time);
 
 
 
