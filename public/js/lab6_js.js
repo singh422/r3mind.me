@@ -8,6 +8,8 @@ var password;
 var user = firebase.auth().currentUser;
 var database = firebase.database();
 var events = [];
+var taskShow = 1;
+
 
 function body_on_load(){
 
@@ -15,6 +17,8 @@ function body_on_load(){
   signupButtonInput.onclick = onClickSignupButton;
   logoutButtonInput.onclick = onClicklogoutButton;
   submitNewEventButtonInput.onclick = onClickSubmitEventButton;
+  incompleteTaskButtonClicked.onclick = showIncompleteTasks;
+  completeTaskButtonClicked.onclick = showCompleteTasks;
 
   if (user) {
     // User is signed in.
@@ -176,6 +180,7 @@ function body_on_load(){
     }
     if (validateEventInputButton(message,date,time)) {
         writeEventDetailsToDatabase(message,date,time,callFeature,messageFeature);
+        getEventsData();
         modal.style.display = "none";
     }
     console.log(date);
@@ -234,6 +239,7 @@ function body_on_load(){
   }
 
   function getEventsData() {
+    events = [];
     console.log("comes here 1");
     var userID = firebase.auth().currentUser.uid;
     var query = firebase.database().ref("events/"+userID);
@@ -272,12 +278,31 @@ function body_on_load(){
 
   }
 
+
+function  showIncompleteTasks() {
+  console.log("coming to incomplete");
+    completeTaskButtonClicked.style.color = "white";
+    incompleteTaskButtonClicked.style.color = "rgba(130,41,219,0.9)";
+    taskShow =1;
+    //load table accordingly
+  }
+
+  function showCompleteTasks() {
+    console.log("coming to complete");
+    completeTaskButtonClicked.style.color = "rgba(130,41,219,0.9)";
+    incompleteTaskButtonClicked.style.color = "white";
+    taskShow = 0;
+    //load table accordingly
+
+  }
+
   function loadEventsTable() {
 
     var count = 0;
     // console.log("load");
     // console.log(events);
     // console.log(events.length);
+    eventsTable.innerHTML="";
     while (count < events.length) {
 
 
@@ -339,7 +364,7 @@ function body_on_load(){
       rowDiv.appendChild(timeDiv);
       rowDiv.appendChild(callFeature);
       rowDiv.appendChild(messageFeature);
-      
+
       rowDiv.setAttribute("onClick","editEvent(this.id)");
       row.appendChild(rowDiv);
 
@@ -355,7 +380,7 @@ function body_on_load(){
     //console.log(timeVal);
     var dateParts = dateVal.split("-");
     var year = parseInt(dateParts[0]);
-    var month = parseInt(dateParts[1]);
+    var month = parseInt(dateParts[1] - 1);
     var day = parseInt(dateParts[2]);
     var timeParts = timeVal.split(":");
     var hours = parseInt(timeParts[0]);
