@@ -280,32 +280,53 @@ function body_on_load(){
   function checkDate(eventDate, eventTime){
 
 
-    var dtToday = new Date();
+    var dtToday = new Date().getTime();
 
-    var month = dtToday.getMonth() + 1;
-    var day = dtToday.getDate();
-    var year = dtToday.getFullYear();
+    // var month = dtToday.getMonth() + 1;
+    // var day = dtToday.getDate();
+    // var year = dtToday.getFullYear();
+    //
+    // if(month < 10)
+    //     month = '0' + month.toString();
+    // if(day < 10)
+    //     day = '0' + day.toString();
+    //
 
-    if(month < 10)
-        month = '0' + month.toString();
-    if(day < 10)
-        day = '0' + day.toString();
+    var dateParts = eventDate.split("-");
+    var year = parseInt(dateParts[0]);
+    var month = parseInt(dateParts[1] - 1);
+    var day = parseInt(dateParts[2]);
+    var timeParts = eventTime.split(":");
+    var hours = parseInt(timeParts[0]);
+    var minutes = parseInt(timeParts[1]);
 
-    var currentDate = year + '-' + month + '-' + day;
+    var eventDate = new Date(year, month, day, hours, minutes, 0, 0).getTime();
+    // var currentDate = year + '-' + month + '-' + day;
 
-    if(eventDate < currentDate){
+    if (eventDate < dtToday) {
       return 0;
+    }
+    else{
+      return 1;
+    }
 
-    } else if ( eventDate === currentDate) {
-      var d = new Date();
-      var h = (d.getHours()<10?'0':'') + d.getHours();
-      var m = (d.getMinutes()<10?'0':'') + d.getMinutes();
-      var currTime = h + ":" +m;
-      if(eventTime < currTime ) {
-        return 0;
-      }
-  }
-  return 1;
+
+
+  //   if(eventDate < currentDate){
+  //     return 0;
+  //
+  //   } else if ( eventDate === currentDate) {
+  //     var d = new Date();
+  //     var h = (d.getHours()<10?'0':'') + d.getHours();
+  //     var m = (d.getMinutes()<10?'0':'') + d.getMinutes();
+  //     var currTime = h + ":" +m;
+  //     if(eventTime < currTime ) {
+  //       return 0;
+  //     }
+  // }
+  // return 1;
+
+
 
 }
 
@@ -408,7 +429,7 @@ function  showIncompleteTasks() {
     else {
       eventShow = incompleteEvents;
     }
-    console.log(eventShow);
+    // console.log(eventShow);
 
     while (count < eventShow.length) {
 
@@ -417,7 +438,7 @@ function  showIncompleteTasks() {
       var row = eventsTable.insertRow();
       var cell1 = row.insertCell(0);
       // var cell2 = row.insertCell(1);
-      
+
       //////
       var rowDiv = document.createElement("div");
       // var taskDiv =  document.createElement("div");
@@ -501,10 +522,12 @@ function  showIncompleteTasks() {
         // Find the distance between now an the count down date
         var distance = countDownDate - now;
         // If the count down is finished, write some text
-        console.log("distance = " + distance);
+        // console.log("distance = " + distance);
         if (distance < 0) {
-          clearInterval(x);
+          if(document.getElementById(divElement)!= null){
           document.getElementById(divElement).innerHTML = "Your event has expired";
+          }
+          clearInterval(x);
         }
         else {
           // Time calculations for days, hours, minutes and seconds
@@ -514,8 +537,12 @@ function  showIncompleteTasks() {
           var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
           // Display the result in the element with id="demo"
-          document.getElementById(divElement).innerHTML = days + "d " + hours + "h "
-    + minutes + "m " + seconds + "s ";
+
+          if(document.getElementById(divElement)!= null){
+            document.getElementById(divElement).innerHTML = days + "d " + hours + "h "
+      + minutes + "m " + seconds + "s ";
+          }
+
 
         }
       }, 1000);
