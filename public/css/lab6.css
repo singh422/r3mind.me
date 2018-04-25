@@ -566,21 +566,24 @@ li a:hover:not(.active) {
  margin-left: 60px; */
  text-transform: capitalize;
  font-weight:bold;
- font-size: 30px;
+ font-size: 25px;
 }
 
 #tableTimeDiv {
 /* text-align: right;
 margin-right: 60px; */
 text-align: center;
+margin-top: 20px;
 /* margin-left: 180px; */
 font-size: 70px;
+margin-bottom: 20px;
 }
 
 #tableCallDiv {
   /* text-align: left;
   margin-left: 60px; */
   text-align: center;
+
 }
 
 #tableMessageDiv {

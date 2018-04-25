@@ -485,8 +485,8 @@ function  showIncompleteTasks() {
       rowDiv.appendChild(taskMessageDiv);
       rowDiv.appendChild(dateDiv);
       rowDiv.appendChild(timeDiv);
-      rowDiv.appendChild(callFeature);
-      rowDiv.appendChild(messageFeature);
+      // rowDiv.appendChild(callFeature);
+      // rowDiv.appendChild(messageFeature);
 
       rowDiv.setAttribute("onClick","editEvent(this.id)");
       row.appendChild(rowDiv);
