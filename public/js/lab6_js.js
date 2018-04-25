@@ -356,7 +356,7 @@ function body_on_load(){
 function  showIncompleteTasks() {
   //console.log("coming to incomplete");
     completeTaskButtonClicked.style.color = "white";
-    incompleteTaskButtonClicked.style.color = "rgba(130,41,219,0.9)";
+    incompleteTaskButtonClicked.style.color = "rgba(120,119,177,0.9)";
 
     taskShow = 1;
     //load table accordingly
@@ -367,7 +367,7 @@ function  showIncompleteTasks() {
 
   function showCompleteTasks() {
     //console.log("coming to complete");
-    completeTaskButtonClicked.style.color = "rgba(130,41,219,0.9)";
+    completeTaskButtonClicked.style.color = "rgba(120,119,177,0.9)";
     incompleteTaskButtonClicked.style.color = "white";
     taskShow = 0;
     //load table accordingly
