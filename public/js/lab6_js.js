@@ -12,6 +12,8 @@ var incompleteEvents = [];
 var completeEvents = [];
 var taskShow = 1;
 
+var savedUserPhoneNumber = "";
+
 
 function body_on_load(){
 
@@ -47,6 +49,7 @@ function body_on_load(){
      loginForm.style.display = "none";
      reminderPage.style.display = "block";
      console.log("comes here and is successful")
+     getUserPhoneNumber();
      getEventsData();
    } else {
      // No user is signed in.
@@ -56,6 +59,9 @@ function body_on_load(){
 
    }
  });
+
+
+
 
  function onClickSignupButton(){
 
@@ -69,7 +75,7 @@ function body_on_load(){
      firebase.auth().createUserWithEmailAndPassword(emailAddress, password).then(function(response) {
         console.log(response.uid);
         writeUserDataToDatabase(firstName,lastName,emailAddress,phoneNumber,response.uid);
-
+        savedUserPhoneNumber = "+1"+phoneNumber;
         }).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
@@ -240,6 +246,18 @@ function body_on_load(){
     return true;
   }
 
+
+  function getUserPhoneNumber(){
+    var userID = firebase.auth().currentUser.uid;
+    var query = firebase.database().ref("users/"+userID);
+    query.once("value").then(function(snapshot){
+      console.log(snapshot.val().phoneNumber);
+      savedUserPhoneNumber = snapshot.val().phoneNumber;
+    });
+
+  }
+
+
   function getEventsData() {
     events = [];
     console.log("comes here 1");
@@ -282,15 +300,7 @@ function body_on_load(){
 
     var dtToday = new Date().getTime();
 
-    // var month = dtToday.getMonth() + 1;
-    // var day = dtToday.getDate();
-    // var year = dtToday.getFullYear();
-    //
-    // if(month < 10)
-    //     month = '0' + month.toString();
-    // if(day < 10)
-    //     day = '0' + day.toString();
-    //
+
 
     var dateParts = eventDate.split("-");
     var year = parseInt(dateParts[0]);
@@ -301,7 +311,6 @@ function body_on_load(){
     var minutes = parseInt(timeParts[1]);
 
     var eventDate = new Date(year, month, day, hours, minutes, 0, 0).getTime();
-    // var currentDate = year + '-' + month + '-' + day;
 
     if (eventDate < dtToday) {
       return 0;
@@ -309,22 +318,6 @@ function body_on_load(){
     else{
       return 1;
     }
-
-
-
-  //   if(eventDate < currentDate){
-  //     return 0;
-  //
-  //   } else if ( eventDate === currentDate) {
-  //     var d = new Date();
-  //     var h = (d.getHours()<10?'0':'') + d.getHours();
-  //     var m = (d.getMinutes()<10?'0':'') + d.getMinutes();
-  //     var currTime = h + ":" +m;
-  //     if(eventTime < currTime ) {
-  //       return 0;
-  //     }
-  // }
-  // return 1;
 
 
 
@@ -566,7 +559,8 @@ function  showIncompleteTasks() {
      'Date': date,
      'Time': time,
      'CallFeature': callFeature,
-     'MessageFeature': messageFeature
+     'MessageFeature': messageFeature,
+     'PhoneNumber':savedUserPhoneNumber
     }).then(function() {
      console.log('Synchronization succeeded');
     })
