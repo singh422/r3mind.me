@@ -504,6 +504,8 @@ li a:hover:not(.active) {
   display: block;
 }
 
+
+
 /* Style the indicator (dot/circle) */
 .container .checkmark:after {
   top: 9px;
@@ -511,7 +513,7 @@ li a:hover:not(.active) {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: white;
+  /* background: white; */
 }
 
 
@@ -579,4 +581,39 @@ font-size: 70px;
   margin-right: 60px;*/
   margin-bottom: 20px;
   text-align: center;
+}
+
+fieldset {
+  overflow: hidden
+}
+
+.some-class {
+  float: left;
+  clear: none;
+}
+
+#label1 {
+  float: left;
+  margin-left: 295px;
+  clear: none;
+  display: block;
+  padding: 2px 1em 0 0;
+  color:rgba(120,120,120,1);
+  /* margin-bottom: -50px; */
+  margin-top:-10px;
+
+}
+
+#label1.highlight {
+  color: #000;
+  margin-left:300px;
+
+}
+
+input[type=radio],
+input.radio {
+  float: left;
+  clear: none;
+  margin: 2px 0 0 2px;
+  /* border: none; */
 }

@@ -192,18 +192,39 @@
     <input type="time" name = "due" id="timeInput"><br>
 
     <p>Do you want a call as a reminder?</p>
-    <label class="container" style="color: rgba(90,70,182,1)">Yes
+    <fieldset>
+    <!-- <input type="radio" class="radio" name="message" value="Yes" id="callCheckboxInput1" /> -->
+    <label id = "label1" for="callCheckboxInput1">Yes</label>
+    <input type="radio" class="radio" name="call" value="No" id="callCheckboxInput2" />
+    <br>
+    <label id = "label1" for="callCheckboxInput2">No</label>
+    <input type="radio" class="radio" name="call" value="No" id="callCheckboxInput1" />
+    <!-- <label id = "label1" for="callCheckboxInput2">No</label> -->
+  </fieldset>
+
+
+    <!-- <label class="container" style="color: rgba(90,70,182,1)">Yes
       <input type="radio" checked="checked" name="call" value="Yes" id="callCheckboxInput1">
       <span class="checkmark"></span>
     </label>
     <label class="container" style="color: rgba(90,70,182,1)">No
       <input type="radio" name="call" value="No" id="callCheckboxInput2">
       <span class="checkmark"></span>
-    </label>
+    </label> -->
 
     <p>Do you want a message as a reminder?</p>
+    <fieldset>
+    <!-- <input type="radio" class="radio" name="message" value="Yes" id="messageCheckboxInput1" /> -->
+    <label id = "label1" for="messageCheckboxInput1">Yes</label>
+    <input type="radio" class="radio" name="message" value="No" id="messageCheckboxInput2" />
+    <br>
+    <label id = "label1" for="messageCheckboxInput2">No</label>
+    <input type="radio" class="radio" name="message" value="No" id="messageCheckboxInput1" />
+    <!-- <label id = "label1" for="callCheckboxInput2">No</label> -->
+  </fieldset>
 
-    <label class="container" style="color: rgba(90,70,182,1)">Yes
+
+    <!-- <label class="container" style="color: rgba(90,70,182,1)">Yes
       <input type="radio" checked="checked" name="message" value="Yes" id="messageCheckboxInput1" style="color: rgba(90,70,182,1)">
       <span class="checkmark"></span>
     </label>
@@ -212,7 +233,7 @@
       <span class="checkmark"></span>
     </label>
     <br>
-    <br>
+    <br> -->
 
     <button class="button button-block" id="submitNewEventButtonInput">Done</button>
   </div>
