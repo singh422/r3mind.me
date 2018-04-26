@@ -19,6 +19,8 @@ var TWILIO_AUTH_TOKEN='591995cd8367c406d6084f4120288fe5';
 
 // const functions = require('firebase-functions');
 var twilio = require('twilio');
+const twilioCall = require('twilio').twiml.VoiceResponse;
+const callResponse = new twilioCall();
 var client = new twilio(TWILIO_ACCOUNT_sid, TWILIO_AUTH_TOKEN);
 cronJob = require('cron').CronJob;
 
