@@ -187,7 +187,7 @@ input:focus{
 }
 
 .button-block {
-  display: block;
+  /*display: block;*/
   width: 100%;
 }
 
@@ -624,6 +624,10 @@ fieldset {
   color: #000;
   margin-left:300px;
 
+}
+
+#submitEditEventButtonInput {
+  display: none;
 }
 
 input[type=radio],

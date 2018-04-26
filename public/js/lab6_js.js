@@ -23,6 +23,7 @@ function body_on_load(){
   submitNewEventButtonInput.onclick = onClickSubmitEventButton;
   incompleteTaskButtonClicked.onclick = showIncompleteTasks;
   completeTaskButtonClicked.onclick = showCompleteTasks;
+  submitEditEventButtonInput.onclick = editEventDetails;
 
   if (user) {
     // User is signed in.
@@ -272,14 +273,14 @@ function body_on_load(){
               var time = childSnapshot.val().Time;
               var messageFeature = childSnapshot.val().MessageFeature;
               var callFeature = childSnapshot.val().CallFeature;
-
+              //console.log(childSnapshot.key);
               var event  = {
                 task: task,
                 date: date,
                 time: time,
                 messageFeature: messageFeature,
                 callFeature: callFeature,
-                //id: childSnapshot.key
+                id: childSnapshot.key
               };
 
               events.push(event);
@@ -355,6 +356,7 @@ function  showIncompleteTasks() {
     //load table accordingly
     filterTasks();
     loadEventsTable();
+
 
   }
 
@@ -452,11 +454,12 @@ function  showIncompleteTasks() {
       rowDiv.setAttribute("id", "rowElementDiv");
       timerDiv.setAttribute("class", "timerDivClass");
 
-      timerDiv.setAttribute("id", "timerDiv"+taskShow+"-"+count);
-
-      createTimer("timerDiv"+taskShow+"-"+count,eventObj.date, eventObj.time);
-
-
+      var uid = guid();
+      console.log(uid);
+      // timerDiv.setAttribute("id", "timerDiv"+taskShow+"-"+count);
+      // createTimer("timerDiv"+taskShow+"-"+count,eventObj.date, eventObj.time);
+      timerDiv.setAttribute("id", uid);
+      createTimer(uid,eventObj.date, eventObj.time);
 
       //timerDiv.innerHTML = "hey it should be here";
       //cell1.innerHTML = eventObj.task;
@@ -480,14 +483,19 @@ function  showIncompleteTasks() {
       rowDiv.appendChild(timeDiv);
       // rowDiv.appendChild(callFeature);
       // rowDiv.appendChild(messageFeature);
+      row.setAttribute("id",taskShow+"-"+count);
 
-      rowDiv.setAttribute("onClick","editEvent(this.id)");
+      row.setAttribute("onClick","editEvent(this.id)");
       row.appendChild(rowDiv);
 
       eventsTable.insertRow(row);
       count++;
     }
   }
+
+
+
+  var prevSize;
 
   function createTimer(divElement, dateVal, timeVal) {
 
@@ -531,7 +539,7 @@ function  showIncompleteTasks() {
 
           // Display the result in the element with id="demo"
 
-          if(document.getElementById(divElement)!= null){
+          if(document.getElementById(divElement)!= null) {
             document.getElementById(divElement).innerHTML = days + "d " + hours + "h "
       + minutes + "m " + seconds + "s ";
           }
@@ -543,9 +551,104 @@ function  showIncompleteTasks() {
 
   }
 
-  function editEvent (id) {
-    console.log("edit clicked");
+
+function guid() {
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
   }
+
+
+  var editEventId;
+
+  function editEvent (id) {
+    // console.log("edit clicked");
+    // console.log(id);
+    var arr = id.split('-');
+    var eventsArr = [];
+
+    if(arr[0] == 0) {
+      eventsArr = completeEvents;
+    } else {
+      eventsArr = incompleteEvents;
+    }
+
+    var eventObj = eventsArr[arr[1]];
+    editEventId = eventObj.id;
+
+    console.log(eventObj.task);
+    console.log(eventObj.id);
+
+    messageInput.value = eventObj.task;
+    dateInput.value = eventObj.date;
+    timeInput.value = eventObj.time;
+    submitNewEventButtonInput.style.display = "none";
+    submitEditEventButtonInput.style.display = "block";
+
+    modal.style.display = "block";
+
+
+  }
+
+  function editEventDetails(id) {
+
+    var message = messageInput.value;
+    var date = dateInput.value;
+    var time = timeInput.value;
+    var callFeature;
+    var messageFeature;
+    prevSize = incompleteEvents.length;
+    if(callCheckboxInput1.checked){
+      callFeature = callCheckboxInput1.value;
+    }else {
+      callFeature = callCheckboxInput2.value;
+    }
+    if ( messageCheckboxInput1.checked){
+      messageFeature = messageCheckboxInput1.value;
+    } else {
+      messageFeature = messageCheckboxInput2.value;
+    }
+    if (validateEventInputButton(message,date,time)) {
+        editEventDetailsToDatabase(editEventId,message,date,time,callFeature,messageFeature);
+        submitNewEventButtonInput.style.display = "block";
+        submitEditEventButtonInput.style.display = "none";
+        modal.style.display = "none";
+
+    }
+
+    // console.log(firebase.auth().currentUser.uid);
+
+  }
+
+  function editEventDetailsToDatabase(editEventId,message,date,time,callFeature,messageFeature) {
+
+    console.log("comes to edit");
+    var userID = firebase.auth().currentUser.uid;
+    var messageListRef = firebase.database().ref('events/'+userID+"/"+editEventId);
+    messageListRef.set({
+    'Message': message,
+    'Date': date,
+    'Time': time,
+    'CallFeature': callFeature,
+    'MessageFeature': messageFeature,
+    'PhoneNumber':savedUserPhoneNumber
+   }).then(function() {
+     getEventsData();
+    console.log('Synchronization edit succeeded');
+   })
+   .catch(function(error) {
+    console.log('Synchronization edit failed');
+    console.log(error);
+   });
+   console.log("successful write");
+
+  }
+
+
+
 
 
 
@@ -566,7 +669,7 @@ function  showIncompleteTasks() {
     })
     .catch(function(error) {
      console.log('Synchronization failed');
-     console.lof(error);
+     console.log(error);
     });
     console.log("successful write");
 
