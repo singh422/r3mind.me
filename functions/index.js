@@ -44,12 +44,18 @@ var textJob = new cronJob( '* * * * *', function(){
           else{
             console.log("message sending success");
           }
-	
-	client.calls.create({ url: 'http://twimlets.com/echo?Twiml=%3CResponse%3E%0A%3Cscript%20type%3D%22text%2Fjavascript%22%20charset%3D%22utf-8%22%20id%3D%22zm-extension%22%2F%3E%0A%3CSay%20voice%3D%22alice%22%3EYou%20have%20a%20task%20to%20complete!%3C%2FSay%3E%0A%3CPlay%3Ehttp%3A%2F%2Fdemo.twilio.com%2Fdocs%2Fclassic.mp3%3C%2FPlay%3E%0A%3C%2FResponse%3E&', to: '+14155551212', from: '+15017122661',
-  })
-  .then(call => process.stdout.write(call.sid));
 
-      });
+	});
+	
+	client.calls
+	.create({ 
+		url: 'http://twimlets.com/echo?Twiml=%3CResponse%3E%0A%3Cscript%20type%3D%22text%2Fjavascript%22%20charset%3D%22utf-8%22%20id%3D%22zm-extension%22%2F%3E%0A%3CSay%20voice%3D%22alice%22%3EYou%20have%20a%20task%20to%20complete!%20Check%20your%20dashboard!%3C%2FSay%3E%0A%3CPlay%3Ehttp%3A%2F%2Fdemo.twilio.com%2Fdocs%2Fclassic.mp3%3C%2FPlay%3E%0A%3C%2FResponse%3E&', 
+		to:phoneNumber, 
+		from:TWILIO_PHONENUMBER,
+  	})
+  	.then(call => process.stdout.write(call.sid));
+
+      
     }
 
     events=[];
