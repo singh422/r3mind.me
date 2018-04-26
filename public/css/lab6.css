@@ -145,6 +145,11 @@ input:focus{
 
 }
 
+::selection {
+    color: purple;
+    /* background: yellow; */
+}
+
 .field-wrap {
   position: relative;
   margin-bottom: 40px;
@@ -535,10 +540,12 @@ li a:hover:not(.active) {
   width: 35%;
 }
 
-#rowElementDiv {
+#rowElementDiv.highlight {
   /* background-color: rgb(100, 0, 102, 0.6); */
-  /* background-color: #778ece; */
+  background-color: #778ece;
+
 }
+
 
 
 .timerDivClass {
@@ -550,7 +557,6 @@ li a:hover:not(.active) {
  font-weight:bold;
  font-size: 20px;
 }
-
 
 #tableDateDiv {
   /* text-align: right;
