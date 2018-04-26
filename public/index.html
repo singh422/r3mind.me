@@ -106,15 +106,6 @@
 
 <div id = "reminderPage">
 
-  <!-- <div class="header"> -->
-    <!-- <h2>Welcome :)</h2> -->
-    <!-- <p>Scroll down to see the sticky effect.</p> -->
-    <!-- <h1> Welcome to</h1> -->
-    <!-- <img src= "remindmeee.png"> -->
-    <!-- <h1>You have enough to remember, we got this one. </h1> -->
-    <!-- <p style="font-family: 'Satisfy', cursive; font-size:20px; text-align: center"> Add Tasks |   Set Reminders   |   Get Notified | Check Progess</p> -->
-  <!-- </div> -->
-
 
   <div id="nav">
 
@@ -150,14 +141,8 @@
       <h1 style="font-family: 'Satisfy', cursive; text-align: center; font-size:40px">You have enough to remember, we got this one. </h1>
       <p style: "font-size:20px; text-align: center"> Add Tasks |   Set Reminders   |   Get Notified | Check Progess</p>
 
-      <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-      <!-- <a href="#top">Top</a> -->
-      <!-- <a href="#middle"><img id= "th-img" src= "btn.png"></a>
 
-      <div id="top"><a href="top"></a></div>
-      <div id="middle"><a href="middle"></a> </div> -->
-
-      <div class="top"><button type="button" onclick="smoothScroll(document.getElementById('second'))"><img id= "th-img"  src= "btn.png"></button></div>
+      <div class="top"><button type="button" style="margin-top: 230px;" onclick="smoothScroll(document.getElementById('second'))"><img id= "th-img"  src= "btn.png"></button></div>
 
       <div class="middle" id="second"></div>
 
@@ -168,13 +153,6 @@
 
   <div class="form form2">
 
-
-    <!-- <div id="top"><a href="top">Top</a></div> -->
-
-  <!--MOOOOOODAL -->
-    <!-- Trigger/Open The Modal -->
-
-  <!-- The Modal -->
   <div id="myModal" class="modal">
 
   <!-- Modal content -->
@@ -185,38 +163,28 @@
     <p>Enter your task</p>
     <input type="text" name="task" id="messageInput"><br>
 
-    <p>Due date</p>
+    <p>Date</p>
     <input type="date" name = "due" id="dateInput"><br>
 
-    <p>Time it's due</p>
+    <p>Set reminder for</p>
     <input type="time" name = "due" id="timeInput"><br>
 
     <p>Do you want a call as a reminder?</p>
     <fieldset>
     <!-- <input type="radio" class="radio" name="message" value="Yes" id="callCheckboxInput1" /> -->
     <label id = "label1" for="callCheckboxInput2">Yes</label>
-    <input type="radio" class="radio" name="call" value="Yes" id="callCheckboxInput2" />
+    <input type="radio" class="radio" name="call" value="Yes" checked = "checked" id="callCheckboxInput2" />
     <br>
     <label id = "label1" for="callCheckboxInput1">No</label>
     <input type="radio" class="radio" name="call" value="No" id="callCheckboxInput1" />
     <!-- <label id = "label1" for="callCheckboxInput2">No</label> -->
   </fieldset>
 
-
-    <!-- <label class="container" style="color: rgba(90,70,182,1)">Yes
-      <input type="radio" checked="checked" name="call" value="Yes" id="callCheckboxInput1">
-      <span class="checkmark"></span>
-    </label>
-    <label class="container" style="color: rgba(90,70,182,1)">No
-      <input type="radio" name="call" value="No" id="callCheckboxInput2">
-      <span class="checkmark"></span>
-    </label> -->
-
     <p>Do you want a message as a reminder?</p>
     <fieldset>
     <!-- <input type="radio" class="radio" name="message" value="Yes" id="messageCheckboxInput1" /> -->
     <label id = "label1" for="messageCheckboxInput2">Yes</label>
-    <input type="radio" class="radio" name="message" value="Yes" id="messageCheckboxInput2" />
+    <input type="radio" class="radio" name="message" value="Yes" checked = "checked" id="messageCheckboxInput2" />
     <br>
     <label id = "label1" for="messageCheckboxInput1">No</label>
     <input type="radio" class="radio" name="message" value="No" id="messageCheckboxInput1" />
@@ -224,16 +192,6 @@
   </fieldset>
 
 
-    <!-- <label class="container" style="color: rgba(90,70,182,1)">Yes
-      <input type="radio" checked="checked" name="message" value="Yes" id="messageCheckboxInput1" style="color: rgba(90,70,182,1)">
-      <span class="checkmark"></span>
-    </label>
-    <label class="container" style="color: rgba(90,70,182,1)">No
-      <input type="radio" name="message" value="No" id="messageCheckboxInput2">
-      <span class="checkmark"></span>
-    </label>
-    <br>
-    <br> -->
 
     <button class="button button-block" id="submitNewEventButtonInput">Done</button>
     <button class="button button-block" id="submitEditEventButtonInput">Edit event</button>
