@@ -38,26 +38,35 @@ var textJob = new cronJob( '* * * * *', function(){
 
       var userMessage = "Dear user, this is a reminder for your task: "+ taskMessage+".\nHope you have an amazing day!\n-r3mind.me";
       console.log(userMessage+" to " + phoneNumber);
+
+    if(eventObj.message === "Yes"){
+
       client.messages.create( { to:phoneNumber, from:TWILIO_PHONE_NUMBER, body:userMessage },
       function( err, data ) {
+              if(err){
+                console.log(err);
+              }
+              else{
+                console.log("message sending success");
+              }
+    	});
+
+    }
+
+    if(eventObj.call === "Yes") {
+
+      client.calls.create( { to:phoneNumber, from:TWILIO_PHONE_NUMBER, url: 'http://twimlets.com/echo?Twiml=%3CResponse%3E%0A%3Cscript%20type%3D%22text%2Fjavascript%22%20charset%3D%22utf-8%22%20id%3D%22zm-extension%22%2F%3E%0A%3CSay%20voice%3D%22alice%22%3EYou%20have%20a%20task%20to%20complete!%20Check%20your%20dashboard!%3C%2FSay%3E%0A%3CPlay%3Ehttp%3A%2F%2Fdemo.twilio.com%2Fdocs%2Fclassic.mp3%3C%2FPlay%3E%0A%3C%2FResponse%3E&' },
+      function( err, data ) {
           if(err){
+            console.log("calling failed");
             console.log(err);
           }
           else{
-            console.log("message sending success");
+            console.log("calling success");
           }
+        });
 
-	});
-	
-	client.calls
-	.create({ 
-		url: 'http://twimlets.com/echo?Twiml=%3CResponse%3E%0A%3Cscript%20type%3D%22text%2Fjavascript%22%20charset%3D%22utf-8%22%20id%3D%22zm-extension%22%2F%3E%0A%3CSay%20voice%3D%22alice%22%3EYou%20have%20a%20task%20to%20complete!%20Check%20your%20dashboard!%3C%2FSay%3E%0A%3CPlay%3Ehttp%3A%2F%2Fdemo.twilio.com%2Fdocs%2Fclassic.mp3%3C%2FPlay%3E%0A%3C%2FResponse%3E&', 
-		to:phoneNumber, 
-		from:TWILIO_PHONENUMBER,
-  	})
-  	.then(call => process.stdout.write(call.sid));
-
-      
+      }
     }
 
     events=[];
@@ -84,6 +93,8 @@ function getDataFromFirebase(_callbackFunc) {
             var eventDate=eventSnapshot.val().Date;
             var eventTime=eventSnapshot.val().Time;
             var timeDifference = checkUpcoming(eventDate,eventTime);
+            var callFeature=eventSnapshot.val().CallFeature;
+            var messageFeature=eventSnapshot.val().MessageFeature;
             if(timeDifference != -1){
               var phoneNumber = eventSnapshot.val().PhoneNumber;
               var message = eventSnapshot.val().Message;
@@ -92,7 +103,9 @@ function getDataFromFirebase(_callbackFunc) {
                 date: eventDate,
                 time: eventTime,
                 phoneNumber:phoneNumber,
-                difference : timeDifference
+                difference : timeDifference,
+                call: callFeature,
+                message: messageFeature
               };
               events.push(event);
             }
