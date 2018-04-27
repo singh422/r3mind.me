@@ -190,6 +190,7 @@ function body_on_load(){
     if (validateEventInputButton(message,date,time)) {
         writeEventDetailsToDatabase(message,date,time,callFeature,messageFeature);
         getEventsData();
+        clearModalContents();
         modal.style.display = "none";
     }
     console.log(date);
