@@ -1,13 +1,16 @@
 
 var firebase = require('firebase-admin');
-
+const app = require('express');
+const PORT = process.env.PORT || 5000;
 const firebaseApp = firebase.initializeApp({
   apiKey: "AIzaSyD_Wldco4Zxm7iY9ciLApCTHSZ8zmVVvnk",
   authDomain: "r3mind-me.firebaseapp.com",
   databaseURL: "https://r3mind-me.firebaseio.com",
   projectId: "r3mind-me",
   storageBucket: "r3mind-me.appspot.com",
-  messagingSenderId: "667296460770"
+  messagingSenderId: "667296460770",
+  credential: firebase.credential.cert('./r3mind-me-6964afb354d9.json'),
+  serviceAccount: "./r3mind-me-6964afb354d9.json"
 });
 
 
@@ -39,7 +42,7 @@ var textJob = new cronJob( '* * * * *', function(){
       var userMessage = "Dear user, this is a reminder for your task: "+ taskMessage+".\nHope you have an amazing day!\n-r3mind.me";
       console.log(userMessage+" to " + phoneNumber);
 
-    if(eventObj.message === "Yes"){
+    if(eventObj.messageFeature === "Yes"){
 
       client.messages.create( { to:phoneNumber, from:TWILIO_PHONE_NUMBER, body:userMessage },
       function( err, data ) {
@@ -105,7 +108,7 @@ function getDataFromFirebase(_callbackFunc) {
                 phoneNumber:phoneNumber,
                 difference : timeDifference,
                 call: callFeature,
-                message: messageFeature
+                messageFeature: messageFeature
               };
               events.push(event);
             }
@@ -143,6 +146,13 @@ function checkUpcoming(eventDate,eventTime) {
   }
 }
 
+//
+// app.get('/',(request,response) =>{
+//   response.send("Hello from r3mind.me!");
+// });
+//
+
+
 
 
 
@@ -150,6 +160,6 @@ function checkUpcoming(eventDate,eventTime) {
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
-// exports.helloWorld = functions.https.onRequest((request, response) => {
+// app.helloWorld = functions.https.onRequest((request, response) => {
 //  response.send("Hello from Firebase!");
 // });
