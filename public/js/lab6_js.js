@@ -24,7 +24,7 @@ function body_on_load(){
   incompleteTaskButtonClicked.onclick = showIncompleteTasks;
   completeTaskButtonClicked.onclick = showCompleteTasks;
   submitEditEventButtonInput.onclick = editEventDetails;
-
+  deleteEventButton.onclick = deleteEventDetails;
   if (user) {
     // User is signed in.
     loginForm.style.display = "none";
@@ -640,7 +640,7 @@ function guid() {
     timeInput.value = eventObj.time;
     submitNewEventButtonInput.style.display = "none";
     submitEditEventButtonInput.style.display = "block";
-
+    deleteEventButton.style.display = "block";
 
     if(eventObj.callFeature === "Yes") {
       callCheckboxInput1.checked = false;
@@ -673,6 +673,32 @@ function guid() {
     messageCheckboxInput2.checked = true;
   }
 
+  function deleteEventDetails() {
+    console.log("delete" + editEventId);
+    var userID = firebase.auth().currentUser.uid;
+    var messageListRef = firebase.database().ref('events/'+userID);
+    messageListRef.child(editEventId).remove(function (error) {
+    if (!error) {
+        // removed!
+        console.log("deletion succeeded");
+
+        getEventsData();
+        clearModalContents();
+        submitNewEventButtonInput.style.display = "block";
+        submitEditEventButtonInput.style.display = "none";
+        deleteEventButton.style.display = "none";
+        modal.style.display = "none";
+      }
+      else {
+        console.log("deletion failed");
+      }
+    });
+
+
+
+  }
+
+
 
   function editEventDetails(id) {
 
@@ -696,6 +722,8 @@ function guid() {
         editEventDetailsToDatabase(editEventId,message,date,time,callFeature,messageFeature);
         submitNewEventButtonInput.style.display = "block";
         submitEditEventButtonInput.style.display = "none";
+        clearModalContents();
+        deleteEventButton.style.display = "none";
         modal.style.display = "none";
 
     }

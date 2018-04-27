@@ -636,6 +636,9 @@ fieldset {
 #submitEditEventButtonInput {
   display: none;
 }
+#deleteEventButton {
+  display: none;
+}
 
 input[type=radio],
 input.radio {
