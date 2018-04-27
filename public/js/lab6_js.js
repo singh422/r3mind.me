@@ -329,6 +329,7 @@ function body_on_load(){
     var count = 0;
     incompleteEvents=[];
     completeEvents=[];
+    events.sort(compare);
     while(count < events.length) {
       var eventObj = events[count];
 
@@ -426,6 +427,28 @@ function  showIncompleteTasks() {
     }
     // console.log(eventShow);
 
+
+
+
+    if(eventShow.length === 0) {
+      console.log("it's empty");
+      var row = eventsTable.insertRow();
+      var rowDiv = document.createElement("div");
+      var taskMessageDiv = document.createElement("div");
+      taskMessageDiv.setAttribute("id","taskMessageDiv");
+      rowDiv.setAttribute("id", "rowElementDiv");
+      var term;
+      if (taskShow === 0){
+        term = "expired";
+      }else {
+        term = "upcoming";
+      }
+      taskMessageDiv.innerHTML = "\nYou have no "+term+" tasks. Click on [ + ] to add a new Task!\n";
+      rowDiv.appendChild(taskMessageDiv);
+      row.appendChild(rowDiv);
+      return;
+    }
+
     while (count < eventShow.length) {
 
 
@@ -494,6 +517,36 @@ function  showIncompleteTasks() {
   }
 
 
+  function compare(a,b) {
+
+    var dateParts = a.date.split("-");
+    var year = parseInt(dateParts[0]);
+    var month = parseInt(dateParts[1] - 1);
+    var day = parseInt(dateParts[2]);
+    var timeParts = a.time.split(":");
+    var hours = parseInt(timeParts[0]);
+    var minutes = parseInt(timeParts[1]);
+
+    var eventDateA = new Date(year, month, day, hours, minutes, 0, 0).getTime();
+
+    dateParts = b.date.split("-");
+    year = parseInt(dateParts[0]);
+    month = parseInt(dateParts[1] - 1);
+    day = parseInt(dateParts[2]);
+    timeParts = b.time.split(":");
+    hours = parseInt(timeParts[0]);
+    minutes = parseInt(timeParts[1]);
+
+    var eventDateB = new Date(year, month, day, hours, minutes, 0, 0).getTime();
+
+    if (eventDateA < eventDateB) {
+      return -1;
+    }
+    else{
+      return 1;
+    }
+  return 0;
+  }
 
   var prevSize;
 
@@ -588,10 +641,38 @@ function guid() {
     submitNewEventButtonInput.style.display = "none";
     submitEditEventButtonInput.style.display = "block";
 
+
+    if(eventObj.callFeature === "Yes") {
+      callCheckboxInput1.checked = false;
+      callCheckboxInput2.checked = true;
+    } else {
+      callCheckboxInput1.checked = true;
+      callCheckboxInput2.checked = false;
+    }
+
+    if(eventObj.messageFeature === "Yes") {
+      messageCheckboxInput1.checked = false;
+      messageCheckboxInput2.checked = true;
+    }else {
+      messageCheckboxInput1.checked = true;
+      messageCheckboxInput2.checked = false;
+    }
+
     modal.style.display = "block";
 
 
   }
+
+  function clearModalContents() {
+    messageInput.value = "";
+    dateInput.value ="";
+    timeInput.value="";
+    callCheckboxInput1.checked = false;
+    messageCheckboxInput1.checked = false;
+    callCheckboxInput2.checked = true;
+    messageCheckboxInput2.checked = true;
+  }
+
 
   function editEventDetails(id) {
 
@@ -691,6 +772,8 @@ function guid() {
     });
     console.log("successful write");
  }
+
+
 
  function setMinDate() {
    var dtToday = new Date();
