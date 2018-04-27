@@ -176,6 +176,7 @@ input:focus{
   padding: 15px 0;
   font-size: 2rem;
   font-weight: 600;
+  font-family: 'IBM Plex Mono', monospace;
   text-transform: uppercase;
   letter-spacing: .1em;
   background: #000;
@@ -602,6 +603,7 @@ margin-bottom: 20px;
 
 fieldset {
   overflow: hidden
+  border: 1px solid white;
 }
 
 .some-class {
