@@ -285,11 +285,15 @@ th, td {
 
 #th-img {
    /* margin-left: 30px; */
-    border-radius: 4px;  /* Rounded border */
-    padding: 5px; /* Some padding */
+    border-radius: 100px;  /* Rounded border */
+
+    /* padding: 7px; /* Some padding*/
     width: 30px; /* Set a small width */
     background: none;
     align-self: center;
+    /* outline: none; */
+
+    /* border: 10px solid white; */
 }
 
 
