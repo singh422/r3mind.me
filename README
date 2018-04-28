@@ -2,9 +2,12 @@ Dhriti Chawla (chawla5@purdue.edu)
 Stefany Go (gunawang@purdue.edu)
 Avinash Singh (singh422@purdue.edu)
 
----------------
-|  r3mind.me  | 
----------------
+*---------------*
+*|  r3mind.me  |*
+*---------------*
+
+URL: https://r3mind-me.firebaseapp.com/#
+YouTube video: https://youtu.be/fACdFb6dW9Y 
 
 A web application which lets users set a reminder for various events. 
 The users get a text/call(based on their preference) before their events. 
